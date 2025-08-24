@@ -3,7 +3,6 @@ import {
   Image,
   Text,
   StyleSheet,
-  Dimensions,
   useWindowDimensions,
   ScrollView,
 } from "react-native";
