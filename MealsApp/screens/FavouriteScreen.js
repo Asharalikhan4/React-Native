@@ -1,7 +1,7 @@
 import { View, Text } from "react-native";
 
 const FavuriteScreen = () => {
-  retunr(
+  return (
     <View>
       <Text>Fav Screen</Text>
     </View>
