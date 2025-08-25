@@ -8,6 +8,8 @@ import MealsOverviewScreen from "./screens/MealsOverviewScreen";
 import MealDetailScreen from "./screens/MealDetailScreen";
 import FavuriteScreen from "./screens/FavouriteScreen";
 import FavouriteContextProvider from "./Store/context/favourites";
+import { Provider } from "react-redux";
+import store from "./Store/redux/store";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -16,13 +18,13 @@ function DrawerNavigator() {
   return (
     <Drawer.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: '#351401' },
-        headerTintColor: 'white',
-        sceneContainerStyle: { backgroundColor: '#3f2f25' },
-        drawerContentStyle: { backgroundColor: '#351401' },
-        drawerInactiveTintColor: 'white',
-        drawerActiveTintColor: '#351401',
-        drawerActiveBackgroundColor: '#e4baa1',
+        headerStyle: { backgroundColor: "#351401" },
+        headerTintColor: "white",
+        sceneContainerStyle: { backgroundColor: "#3f2f25" },
+        drawerContentStyle: { backgroundColor: "#351401" },
+        drawerInactiveTintColor: "white",
+        drawerActiveTintColor: "#351401",
+        drawerActiveBackgroundColor: "#e4baa1",
       }}
     >
       <Drawer.Screen
@@ -52,41 +54,43 @@ export default function App() {
   return (
     <>
       <StatusBar style="light" />
-      <FavouriteContextProvider>
-        <NavigationContainer>
-          <Stack.Navigator
-            screenOptions={{
-              headerStyle: { backgroundColor: "#351401" },
-              headerTintColor: "white",
-              contentStyle: { backgroundColor: "#3f2f25" },
-            }}
-          >
-            <Stack.Screen
-              name="Drawer"
-              component={DrawerNavigator}
-              options={{
-                headerShown: false,
+      <Provider store={store}>
+        <FavouriteContextProvider>
+          <NavigationContainer>
+            <Stack.Navigator
+              screenOptions={{
+                headerStyle: { backgroundColor: "#351401" },
+                headerTintColor: "white",
+                contentStyle: { backgroundColor: "#3f2f25" },
               }}
-            />
-            {/* Setting the dynamic option for header*/}
-            <Stack.Screen
-              name="MealsOverview"
-              component={MealsOverviewScreen}
-              // options={({ route, navigation }) => {
-              //   const catId = route.params.categoryId;
-              //   return {
-              //     title: catId,
-              //   };
-              // }}
-            />
-            <Stack.Screen
-              name="MealDetail"
-              component={MealDetailScreen}
-              options={{ title: "About the Meal" }}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </FavouriteContextProvider>
+            >
+              <Stack.Screen
+                name="Drawer"
+                component={DrawerNavigator}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              {/* Setting the dynamic option for header*/}
+              <Stack.Screen
+                name="MealsOverview"
+                component={MealsOverviewScreen}
+                // options={({ route, navigation }) => {
+                //   const catId = route.params.categoryId;
+                //   return {
+                //     title: catId,
+                //   };
+                // }}
+              />
+              <Stack.Screen
+                name="MealDetail"
+                component={MealDetailScreen}
+                options={{ title: "About the Meal" }}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </FavouriteContextProvider>
+      </Provider>
     </>
   );
 }
