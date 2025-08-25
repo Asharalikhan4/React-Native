@@ -1,9 +1,9 @@
 import { useLayoutEffect } from "react";
-import { View, StyleSheet, FlatList } from "react-native";
 import { CATEGORIES, MEALS } from "../data/dummy-data";
 // we can also implement the route thing using the hok also
 import { useRoute } from "@react-navigation/native"; // main difference between the two is we can use hook if the screen is not defined.
-import MealItem from "../components/MealItem";
+import MealItem from "../components/MealList/MealItem";
+import MealsList from "../components/MealList/MealsList";
 
 const MealsOverviewScreen = ({ navigation, route }) => {
   const catId = route.params.categoryId;
@@ -37,21 +37,8 @@ const MealsOverviewScreen = ({ navigation, route }) => {
   }
 
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={displayedMeals}
-        keyExtractor={(item) => item.id}
-        renderItem={renderMealItem}
-      />
-    </View>
+    <MealsList items={displayedMeals} />
   );
 };
 
 export default MealsOverviewScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-  },
-});
